@@ -2,12 +2,12 @@
 #///////////////////////////
 # Cocos Creator 3D Project
 #///////////////////////////
-library/
-temp/
-local/
-build/
-profiles/
-native
+/library 
+/temp 
+/local 
+/profiles 
+/native 
+/build/wx/wechatgame/
 #//////////////////////////
 # NPM
 #//////////////////////////
@@ -22,3 +22,7 @@ node_modules/
 # WebStorm
 #//////////////////////////
 .idea/
+
+.DS_Store
+
+.creator/
