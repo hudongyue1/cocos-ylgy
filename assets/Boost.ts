@@ -1,4 +1,5 @@
-import { _decorator, Component, ResolutionPolicy, screen, Size, view } from 'cc';
+import { _decorator, Component, js, ResolutionPolicy, screen, Size, view } from 'cc';
+import { ResManager } from './fw/res/ResManager';
 const { ccclass, property } = _decorator;
 
 /** 
@@ -11,7 +12,17 @@ export const G_VIEW_SIZE = new Size(0, 0);
 @ccclass('Boost')
 export class Boost extends Component {
     start() {
+        // const WIN_SIZE_W = screen.windowSize.width;
+        // const WIN_SIZE_H = screen.windowSize.height;
         this.adapterScreen();
+        // if (isScreenWidthLarger) {
+        //     screen.windowSize = new Size(WIN_SIZE_W + 1, WIN_SIZE_H);
+        //     screen.windowSize = new Size(WIN_SIZE_W, WIN_SIZE_H);
+        // }
+        ResManager.getInstance().loadBundle("LoginBN", _ => {
+            const loginEntryClass = js.getClassByName("LoginEntry") as typeof Component;
+            this.node.addComponent(loginEntryClass)
+        })
     }
 
     adapterScreen() {
@@ -26,6 +37,7 @@ export class Boost extends Component {
         if (targetResolutionPolicy !== resolutionPolicy.getContentStrategy().strategy) {
             /** 保证设计分辨率的内容都能显示出来 */
             view.setDesignResolutionSize(designSize.width, designSize.height, targetResolutionPolicy);
+            view.emit("canvas-resize")
         }
 
         /** 实际的尺寸会和设计分辨率在一个维度，但是宽或高更大 */
@@ -38,5 +50,6 @@ export class Boost extends Component {
         }
 
         console.log(`屏幕${isScreenWidthLarger ? "更宽, 高度适配" : "更高, 宽度适配"} 设计分辨率比例下的屏幕尺寸: ${G_VIEW_SIZE.width}x${G_VIEW_SIZE.height}`);
+        return isScreenWidthLarger;
     }
 }

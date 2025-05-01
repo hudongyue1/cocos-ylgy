@@ -1,0 +1,13 @@
+{
+  "ver": "1.2.0",
+  "importer": "directory",
+  "imported": true,
+  "uuid": "73b53372-ba96-4d57-926b-db7b2180d7bc",
+  "files": [],
+  "subMetas": {},
+  "userData": {
+    "isBundle": true,
+    "priority": 7,
+    "bundleName": "LoginBN"
+  }
+}
