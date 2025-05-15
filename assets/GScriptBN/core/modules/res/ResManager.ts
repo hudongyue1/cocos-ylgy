@@ -34,6 +34,7 @@ export class ResManager {
             })
         })
     }
+    loadPrefabByBUrl(bUrl: IBundleUrl, cb: (prefab: Prefab | null) => void) { this.loadPrefab(bUrl.b, bUrl.l, cb); }
 
     /**
      * @param bundleName Asset Bundle 的名称
@@ -52,6 +53,7 @@ export class ResManager {
             })
         })
     }
+    loadAudioByBUrl(bUrl: IBundleUrl, cb: (audioClip: AudioClip | null) => void) { this.loadAudioClip(bUrl.b, bUrl.l, cb); }
     
     /**
      * 加载 Asset Bundle 接口
@@ -62,6 +64,12 @@ export class ResManager {
         assetManager.loadBundle(bundleName, (e, bundle) => {
             cb && cb(bundle);
         });
+    }
+
+    loadBundleAsync(bundleName: string): Promise<AssetManager.Bundle> {
+        return new Promise<AssetManager.Bundle>(rs => {
+            this.loadBundle(bundleName, rs);
+        })
     }
 }
 

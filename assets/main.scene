@@ -418,7 +418,7 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 410,
+      "width": 130,
       "height": 110.8
     },
     "_anchorPoint": {
@@ -448,7 +448,7 @@
       "b": 255,
       "a": 255
     },
-    "_string": "锤个大糍粑",
+    "_string": "xxx",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 80,
@@ -733,6 +733,9 @@
     },
     "_enabled": true,
     "__prefab": null,
+    "canvas2d": {
+      "__id__": 17
+    },
     "_id": "10Jh7Qx5VJUIHYnoOKLulP"
   },
   {

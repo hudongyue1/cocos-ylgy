@@ -1,6 +1,6 @@
-import { _decorator, assetManager, AudioClip, AudioSource, Component, director, Node } from 'cc';
+import { _decorator, AudioSource, director, Node } from 'cc';
 import { ResManager } from '../res/ResManager';
-const { ccclass, property } = _decorator;
+const { ccclass } = _decorator;
 
 @ccclass('AudioManager')
 export class AudioManager {
