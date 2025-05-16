@@ -1,7 +1,6 @@
-import { _decorator, Component, instantiate, UITransform } from 'cc';
-import { G_VIEW_SIZE, UIManager } from '../../../core/modules/ui/UIManager';
+import { _decorator, Component } from 'cc';
 import { Match3UI } from './Match3UI';
-import { ResManager } from '../../../core/modules/res/ResManager';
+import { UIManager } from '../../../core/modules/ui/UIManager';
 const { ccclass } = _decorator;
 
 @ccclass('Match3Entry')
