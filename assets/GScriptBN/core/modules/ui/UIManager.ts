@@ -1,7 +1,6 @@
 import { _decorator, Canvas, instantiate, Layers, Node, ResolutionPolicy, Size, UITransform, view, screen } from 'cc';
 import { EViewLayer } from './EViewLayer';
 import { Match3UI } from '../../../GamePlay/modules/Match3/Match3UI';
-import { ResManager } from '../res/ResManager';
 import { BL } from '../res/ResConst';
 const { ccclass } = _decorator;
 
@@ -59,8 +58,6 @@ class MyLayer {
 
 @ccclass('UIManager')
 export class UIManager {
-    private static _instance: UIManager = null!;
-
     private m_Canvas: Canvas = null;
     private m_Layers: MyLayer[] = []
     init(canvas: Canvas) {
@@ -72,21 +69,9 @@ export class UIManager {
         
     }
 
-    /** 获取单例的接口 */
-    static getInstance() {
-        if (this._instance === null) {
-            this._instance = new UIManager();
-        }
-        return this._instance;
-    }
-
-    private constructor() {
-        // 私有化的构造函数
-    }
-
     open(uiClass: any) {
         const bUrl = getUIClassBUrl(uiClass);
-        ResManager.getInstance().loadPrefabByBUrl(bUrl, prefab => {
+        gtr.res.loadPrefabByBUrl(bUrl, prefab => {
             let match3Node = instantiate(prefab);
             this.m_Layers[EViewLayer.UI].node.addChild(match3Node);
             match3Node.getComponent(UITransform).setContentSize(G_VIEW_SIZE.clone());

@@ -2,20 +2,18 @@ import { _decorator, AssetManager, assetManager, AudioClip, Component, Node, Pre
 const { ccclass, property } = _decorator;
 
 @ccclass('ResManager')
-/** 单例模式的资源管理器 */
 export class ResManager {
-    private static _instance: ResManager = null!;
-    /** 获取单例的接口 */
-    static getInstance() {
-        if (this._instance === null) {
-            this._instance = new ResManager();
-        }
-        return this._instance;
-    }
+    // /** 获取单例的接口 */ 取消单例模式
+    // static getInstance() {
+    //     if (this._instance === null) {
+    //         this._instance = new ResManager();
+    //     }
+    //     return this._instance;
+    // }
 
-    private constructor() {
-        // 私有化的构造函数
-    }
+    // private constructor() {
+    //     // 私有化的构造函数
+    // }
 
     /**
      * @param bundleName Asset Bundle 的名称

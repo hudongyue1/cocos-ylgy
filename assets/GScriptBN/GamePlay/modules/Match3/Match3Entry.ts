@@ -14,7 +14,7 @@ export class Match3Entry extends Component {
         //     match3Node.getComponent(UITransform).setContentSize(G_VIEW_SIZE.clone());
         // });
 
-        UIManager.getInstance().open(Match3UI);
+        gtr.ui.open(Match3UI);
     }
 
     start() {

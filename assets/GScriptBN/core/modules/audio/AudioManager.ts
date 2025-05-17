@@ -30,7 +30,7 @@ export class AudioManager {
         /** * 资源路径 */ l: string,
     }): void {
         // 加载背景音乐后播放
-        ResManager.getInstance().loadAudioClip(bUrl.b, bUrl.l, audioClip => {
+        gtr.res.loadAudioClip(bUrl.b, bUrl.l, audioClip => {
             let audioSource = this.m_AudioSource;
             audioSource.clip = audioClip;
             audioSource.loop = true;
