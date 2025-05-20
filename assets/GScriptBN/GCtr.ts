@@ -1,8 +1,9 @@
 import { _decorator, Canvas, Component, js, screen, ResolutionPolicy, Size, view } from 'cc';
-import { UIManager } from './core/modules/ui/UIManager';
+import { registerBUrlByCfg, UIManager } from './core/modules/ui/UIManager';
 import { ResManager } from './core/modules/res/ResManager';
 import { LoginCtr } from './GamePlay/modules/Login/LoginCtr';
 import { Match3UI } from './GamePlay/modules/Match3/Match3UI';
+import { PrefabCfg } from './auto/PrefabCfg';
 const { ccclass, property } = _decorator;
 
 // 新增全局变量声明
@@ -24,17 +25,19 @@ export class GCtr extends Component {
     }) {
         // 全局变量设置
         (globalThis as any)["gtr"] = this;
+        // 注册prefab配置
+        registerBUrlByCfg(PrefabCfg);
 
         // 初始化UIManager
-        this.ui.init(param.canvas2d);
+        gtr.ui.init(param.canvas2d);
         // 登录模块初始化
-        this.loginCtr.init();
+        gtr.loginCtr.init();
         
         
         // 显示登录界面（传入登录成功回调函数）
-        this.loginCtr.showLogin(async () => {
-            await this.res.loadBundleAsync("Match3BN");
-            this.ui.open(Match3UI)
+        gtr.loginCtr.showLogin(async () => {
+            await gtr.res.loadBundleAsync("Match3BN");
+            gtr.ui.open(Match3UI)
         })
     
         // ResManager.getInstance().loadBundle("LoginBN", _ => {

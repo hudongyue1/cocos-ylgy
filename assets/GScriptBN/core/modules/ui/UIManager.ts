@@ -1,14 +1,41 @@
-import { _decorator, Canvas, instantiate, Layers, Node, ResolutionPolicy, Size, UITransform, view, screen } from 'cc';
+import { _decorator, Canvas, instantiate, Layers, Node, ResolutionPolicy, Size, UITransform, view, screen, js } from 'cc';
 import { EViewLayer } from './EViewLayer';
-import { Match3UI } from '../../../GamePlay/modules/Match3/Match3UI';
-import { BL } from '../res/ResConst';
 const { ccclass } = _decorator;
 
-function getUIClassBUrl(uiClass: any): IBundleUrl {
-if (uiClass === Match3UI) {
-        return BL("Prefabs/Match3UI", "Match3BN")
+// function getUIClassBUrl(uiClass: any): IBundleUrl {
+// if (uiClass === Match3UI) {
+//         return BL("Prefabs/Match3UI", "Match3BN")
+//     }
+//     console.log(`其它类型暂未处理`)
+// }
+
+const g_UICls2BUrl: Map<any, IBundleUrl> = new Map();
+const g_Key2BUrl: Map<string, IBundleUrl> = new Map();
+export function registerBUrlByCfg(cfg: {
+    [uiClassName: string]: IBundleUrl
+}) {
+    for (let uiClassName in cfg) {
+        g_Key2BUrl.set(uiClassName, cfg[uiClassName])
     }
-    console.log(`其它类型暂未处理`)
+}
+
+export function getUIClassBUrl(uiClass: any): IBundleUrl {
+    // 如果有类 -> BUrl 的注册信息，直接拿
+    if (g_UICls2BUrl.has(uiClass)) {
+        return g_UICls2BUrl.get(uiClass);
+    }
+    // 如果没有的话，从配置表拿
+    let uiClassName = js.getClassName(uiClass);
+    let bUrl = g_Key2BUrl.get(uiClassName);
+    if (!bUrl) {
+        /** 没有找到类名对应的预制体 */
+        debugger;
+        console.error("没有找到类名对应的预制体 uiClassName: ", uiClassName);
+        return null;
+    }
+    // 缓存住
+    g_UICls2BUrl.set(uiClass, bUrl);
+    return bUrl;
 }
 
 export const G_VIEW_SIZE = new Size(0, 0);
